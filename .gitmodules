@@ -1,3 +1,9 @@
 [submodule "lib/mlx"]
 	path = lib/mlx
 	url = git@github.com:42paris/minilibx-linux.git
+[submodule "lib/ft_printf"]
+	path = lib/ft_printf
+	url = git@github.com:bmdjoco/42ft_printf.git
+[submodule "lib/libft"]
+	path = lib/libft
+	url = git@github.com:bmdjoco/42libft.git

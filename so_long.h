@@ -6,7 +6,7 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:11:40 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/06/19 17:16:12 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/06/20 00:07:14 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,10 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1
 # endif
+
+typedef struct	s_vars {
+	void	*mlx;
+	void	*win;
+}				t_vars;
 
 #endif
