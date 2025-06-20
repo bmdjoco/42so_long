@@ -7,3 +7,6 @@
 [submodule "lib/libft"]
 	path = lib/libft
 	url = git@github.com:bmdjoco/42libft.git
+[submodule "lib/gc"]
+	path = lib/gc
+	url = git@github.com:bmdjoco/garbage_collector.git
