@@ -6,21 +6,11 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:12:23 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/06/20 17:44:16 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/06/23 17:25:45 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
-
-enum {
-	ON_KEYDOWN = 2,
-	ON_KEYUP = 3,
-	ON_MOUSEDOWN = 4,
-	ON_MOUSEUP = 5,
-	ON_MOUSEMOVE = 6,
-	ON_EXPOSE = 12,
-	ON_DESTROY = 17
-};
 
 int	close_window(void *param)
 {
@@ -28,8 +18,13 @@ int	close_window(void *param)
 
 	vars = (t_vars *)param;
 	gc_free_all();
-	mlx_destroy_window((*vars).mlx, (*vars).win);
-	mlx_destroy_display((*vars).mlx);
+	if (vars->win)
+		mlx_destroy_window(vars->mlx, vars->win);
+	if (vars->mlx)
+	{
+		mlx_destroy_display(vars->mlx);
+		free(vars->mlx);
+	}
 	free((*vars).mlx);
 	exit(0);
 	return (0);
@@ -64,6 +59,7 @@ void	print_map(char **map)
 	}
 }
 
+/*
 t_map	*init_map(char *file)
 {
 	char	*buff;
@@ -110,8 +106,75 @@ t_map	*init_map(char *file)
 		carte->map[h][w] = '\0';
 		h++;
 	}
+	close(fd);
 	carte->map[h] = NULL;
 	return (carte);
+}*/
+
+t_map	*alloc_carte(void)
+{
+	t_map	*carte;
+
+	carte = (t_map *) gc_malloc(sizeof(t_map));
+	if(!carte)
+		return (NULL);
+	carte->height = 14;
+	carte->width = 32;
+	carte->map = (char **) gc_malloc(sizeof(char *) * (carte->height + 1));
+	if (!carte->map)
+		return (gc_free_all(), NULL);
+	return (carte);
+}
+
+t_map	*init_map(char *file)
+{
+	t_map	*carte;
+	char	*line;
+	int		fd;
+	int		i;
+	int		h;
+
+	fd = open(file, O_RDONLY);
+	if (fd == -1)
+		return (ft_printf("fd error\n"), NULL);
+	carte = alloc_carte();
+	if (!carte)
+		return (NULL);
+	h = 0;
+	line = get_next_line(fd);
+	while (line)
+	{
+		if((int) ft_strlen(line) > carte->width)
+			return (NULL);
+		i = 0;
+		while (line[i])
+		{
+			carte->map[h][i] = line[i];
+			i++;
+		}
+		line = get_next_line(fd);
+		h++;
+	}
+	carte->map[carte->height] = NULL;
+	if (h > carte->height)
+		return (gc_free_all(), NULL);
+	return (carte);
+}
+
+int	key_press(int key, void *param)
+{
+	(void) param;
+	if (key == XK_Up || key == XK_w)
+		ft_printf("Up presser\n");
+	else if (key == XK_Down || key == XK_s)
+		ft_printf("Down presser\n");
+	else if (key == XK_Left || key == XK_a)
+		ft_printf("Left presser\n");
+	else if (key == XK_Right || key == XK_d)
+		ft_printf("Right presser\n");
+	else if (key == XK_Escape)
+		return (gc_free_all(), close_window(param));
+	return (0);
 }
 
 int main(void)
@@ -122,15 +185,16 @@ int main(void)
 	vars.mlx = mlx_init();
 
 	carte = init_map("assets/map.ber");
-	if (!carte)
-		return(mlx_destroy_window(vars.mlx, vars.win), mlx_destroy_display(vars.mlx), free(vars.mlx), 0);
-
-	print_map(carte->map);
 
 	vars.win = mlx_new_window(vars.mlx, carte->width * 50, carte->height * 50, "So Long");
 
-	mlx_hook(vars.win, ON_DESTROY, 0L, close_window, &vars);
+	if (!carte)
+		return(close_window(&vars));
+	print_map(carte->map);
 
+	mlx_hook(vars.win, 2, 1L << 0, key_press, &vars);
+
+	mlx_hook(vars.win, 17, 0L, close_window, &vars);
 	mlx_loop(vars.mlx);
 	return (0);
 }

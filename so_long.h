@@ -6,7 +6,7 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:11:40 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/06/20 17:28:14 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/06/23 17:22:44 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,6 @@
 # include <fcntl.h>
 # include <X11/keysym.h>
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
-# endif
 
 typedef struct	s_vars {
 	void	*mlx;
@@ -32,8 +29,8 @@ typedef struct	s_vars {
 }				t_vars;
 
 typedef struct	s_map {
-	int		width;
-	int		height;
+	int		width : 32;
+	int		height : 14;
 	char	**map;
 }				t_map;
 
