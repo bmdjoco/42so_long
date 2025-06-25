@@ -6,7 +6,7 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 00:52:44 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/06/25 02:05:04 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/06/25 11:40:30 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	check_bord(t_map *carte)
 	int	i;
 	int	j;
 
-	ft_printf("check_bord start\n");
 	i = 0;
 	while (i < carte->height)
 	{
@@ -42,14 +41,12 @@ int	check_in_out(t_map	*carte)
 	int	nb_i;
 	int	nb_o;
 
-	ft_printf("check_in_out start\n");
 	i = 0;
 	nb_i = 0;
 	nb_o = 0;
 	while (i < carte->height)
 	{
 		j = 0;
-		ft_printf("line %d\n", i);
 		while (carte->map[i][j])
 		{
 			if (carte->map[i][j] == 'P')

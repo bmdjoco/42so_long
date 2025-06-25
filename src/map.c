@@ -6,7 +6,7 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 20:59:52 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/06/25 02:04:28 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/06/25 12:01:57 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static t_map	*alloc_carte(int *fd, char *file)
 	carte->width = 32;
 	carte->map = (char **) gc_malloc(sizeof(char *) * (carte->height + 1));
 	if (!carte->map)
-		return (gc_free_all(), NULL);
+		return (NULL);
 	return (carte);
 }
 
@@ -61,6 +61,7 @@ static int	write_line(t_map *carte, int nb_l, int fd)
 		carte->map[nb_l][i] = res[i];
 		i++;
 	}
+	carte->map[nb_l][i] = '\0';
 	free(res);
 	if (i != carte->width)
 		return (0);
@@ -73,14 +74,12 @@ t_map	*init_map(char *file)
 	int		fd;
 	int		l;
 
-	ft_printf("init_map start\n");
 	carte = alloc_carte(&fd, file);
 	if (!carte)
 		return (NULL);
 	l = 0;
 	while (write_line(carte, l, fd))
 		l++;
-	ft_printf("%d\n", l);
 	carte->map[l] = NULL;
 	if (l != carte->height)
 		return (NULL);

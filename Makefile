@@ -6,7 +6,7 @@
 #    By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/17 14:30:37 by bdjoco            #+#    #+#              #
-#    Updated: 2025/06/25 01:26:22 by bdjoco           ###   ########.fr        #
+#    Updated: 2025/06/25 12:17:41 by bdjoco           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,6 +58,7 @@ $(FT_PRINTF)libftprintf.a:
 
 $(MLX)libmlx_Linux.a:
 	@$(MAKE) $(MLX) > /dev/null 2>&1
+	@echo "$(BOLD)$(PURPLE)Minilibx$(RESET) $(GREEN)est compilé $(RESET)​🔰​"
 
 clean :
 	@$(RM) $(OBJ)

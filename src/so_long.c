@@ -6,7 +6,7 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:12:23 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/06/25 01:34:48 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/06/25 21:46:09 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	key_press(int key, void *param)
 	else if (key == XK_Right || key == XK_d)
 		ft_printf("Right presser\n");
 	else if (key == XK_Escape)
-		return (ft_printf("Close\n"), gc_free_all(), close_window(param));
+		return (ft_printf("Close\n"), close_window(param));
 	return (0);
 }
 
@@ -55,12 +55,10 @@ int main(void)
 	vars.mlx = mlx_init();
 
 	carte = init_map("assets/map.ber");
-
-	vars.win = mlx_new_window(vars.mlx, carte->width * 50, carte->height * 50, "So Long");
-
 	if (!carte)
 		return(close_window(&vars));
-	print_map(carte->map);
+
+	vars.win = mlx_new_window(vars.mlx, carte->width * 50, carte->height * 50, "So Long");
 
 	mlx_hook(vars.win, 2, 1L << 0, key_press, &vars);
 

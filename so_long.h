@@ -6,7 +6,7 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:11:40 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/06/25 01:34:23 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/06/25 11:37:59 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int		close_window(void *param);
 
 void	*gc_malloc(size_t size);
 void	gc_free_all(void);
+void	print_map(char **map);
 
 t_map	*init_map(char *file);
 
