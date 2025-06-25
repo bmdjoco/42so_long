@@ -6,7 +6,7 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:11:40 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/06/23 17:22:44 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/06/25 01:34:23 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,13 @@ typedef struct s_gc_node {
 	struct	s_gc_node *next;
 } t_gc_node;
 
-static t_gc_node *gc_list = NULL;
+int		check_bord(t_map *carte);
+int		check_in_out(t_map	*carte);
+int		close_window(void *param);
 
 void	*gc_malloc(size_t size);
 void	gc_free_all(void);
+
+t_map	*init_map(char *file);
 
 #endif

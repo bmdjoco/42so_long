@@ -6,11 +6,13 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 17:26:41 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/06/20 17:27:41 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/06/25 01:34:29 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
+
+static t_gc_node *gc_list = NULL;
 
 void	*gc_malloc(size_t size)
 {

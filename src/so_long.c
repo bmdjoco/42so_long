@@ -6,39 +6,11 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:12:23 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/06/23 17:25:45 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/06/25 01:34:48 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
-
-int	close_window(void *param)
-{
-	t_vars	*vars;
-
-	vars = (t_vars *)param;
-	gc_free_all();
-	if (vars->win)
-		mlx_destroy_window(vars->mlx, vars->win);
-	if (vars->mlx)
-	{
-		mlx_destroy_display(vars->mlx);
-		free(vars->mlx);
-	}
-	free((*vars).mlx);
-	exit(0);
-	return (0);
-}
-
-int	get_height(char **map)
-{
-	int	h;
-
-	h = 0;
-	while(map[h])
-		h++;
-	return (h);
-}
 
 void	print_map(char **map)
 {
@@ -59,108 +31,6 @@ void	print_map(char **map)
 	}
 }
 
-/*
-t_map	*init_map(char *file)
-{
-	char	*buff;
-	t_map	*carte;
-	int		fd;
-	int		f;
-	int		h;
-	int		w;
-
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
-		return (ft_printf("fd error\n"), NULL);
-	buff = (char *) gc_malloc(sizeof(char) * 2);
-	if(!buff)
-		return (NULL);
-	f = read(fd, buff,BUFFER_SIZE);
-	carte = (t_map *) gc_malloc(sizeof(t_map));
-	if(!carte)
-		return (gc_free_all(), NULL);
-	carte->height = 14;
-	carte->width = 32;
-	carte->map = (char **) gc_malloc(sizeof(char *) * (carte->height + 1));
-	if (!carte->map)
-		return (gc_free_all(), NULL);
-	h = 0;
-	while(f)
-	{
-		if (h >= carte->height)
-			return (gc_free_all(), NULL);
-		w = 0;
-		carte->map[h] = (char *) gc_malloc(sizeof(char) * (carte->width + 1));
-		if (!carte->map[h])
-			return (gc_free_all(), NULL);
-		while (f > 0 && buff[0] != '\n')
-		{
-			if(w >= carte->width)
-				return (gc_free_all(), NULL);
-			carte->map[h][w] = buff[0];
-			f = read(fd, buff,BUFFER_SIZE);
-			w++;
-		}
-		if (buff[0] == '\n')
-			f = read(fd, buff,BUFFER_SIZE);
-		carte->map[h][w] = '\0';
-		h++;
-	}
-	close(fd);
-	carte->map[h] = NULL;
-	return (carte);
-}*/
-
-t_map	*alloc_carte(void)
-{
-	t_map	*carte;
-
-	carte = (t_map *) gc_malloc(sizeof(t_map));
-	if(!carte)
-		return (NULL);
-	carte->height = 14;
-	carte->width = 32;
-	carte->map = (char **) gc_malloc(sizeof(char *) * (carte->height + 1));
-	if (!carte->map)
-		return (gc_free_all(), NULL);
-	return (carte);
-}
-
-t_map	*init_map(char *file)
-{
-	t_map	*carte;
-	char	*line;
-	int		fd;
-	int		i;
-	int		h;
-
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
-		return (ft_printf("fd error\n"), NULL);
-	carte = alloc_carte();
-	if (!carte)
-		return (NULL);
-	h = 0;
-	line = get_next_line(fd);
-	while (line)
-	{
-		if((int) ft_strlen(line) > carte->width)
-			return (NULL);
-		i = 0;
-		while (line[i])
-		{
-			carte->map[h][i] = line[i];
-			i++;
-		}
-		line = get_next_line(fd);
-		h++;
-	}
-	carte->map[carte->height] = NULL;
-	if (h > carte->height)
-		return (gc_free_all(), NULL);
-	return (carte);
-}
-
 int	key_press(int key, void *param)
 {
 	(void) param;
@@ -173,7 +43,7 @@ int	key_press(int key, void *param)
 	else if (key == XK_Right || key == XK_d)
 		ft_printf("Right presser\n");
 	else if (key == XK_Escape)
-		return (gc_free_all(), close_window(param));
+		return (ft_printf("Close\n"), gc_free_all(), close_window(param));
 	return (0);
 }
 
