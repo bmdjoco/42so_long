@@ -6,7 +6,7 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:12:23 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/06/25 21:46:09 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/06/27 19:24:06 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,19 @@ int	key_press(int key, void *param)
 int main(void)
 {
 	t_vars	vars;
-	t_map	*carte;
+	int		t_size;
 
+	vars.mlx = NULL;
+	vars.win = NULL;
+	vars.carte = NULL;
 	vars.mlx = mlx_init();
-
-	carte = init_map("assets/map.ber");
-	if (!carte)
+	vars.carte = init_map_re("assets/map3.ber");
+	if (!vars.carte)
 		return(close_window(&vars));
-
-	vars.win = mlx_new_window(vars.mlx, carte->width * 50, carte->height * 50, "So Long");
-
+	t_size = 50;
+	vars.win = mlx_new_window(vars.mlx, vars.carte->width * t_size, vars.carte->height * t_size, "So Long");
+	draw_map(&vars);
 	mlx_hook(vars.win, 2, 1L << 0, key_press, &vars);
-
 	mlx_hook(vars.win, 17, 0L, close_window, &vars);
 	mlx_loop(vars.mlx);
 	return (0);

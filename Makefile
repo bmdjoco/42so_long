@@ -6,7 +6,7 @@
 #    By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/17 14:30:37 by bdjoco            #+#    #+#              #
-#    Updated: 2025/06/25 12:17:41 by bdjoco           ###   ########.fr        #
+#    Updated: 2025/06/27 16:03:55 by bdjoco           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,10 @@ RM = rm -f
 
 SRC = src/so_long.c \
 		src/error.c \
-		src/map.c \
-		src/map_check.c \
+		src/map_re.c \
+		src/map_check_re.c \
+		src/go_next_line.c \
+		src/map_draw.c \
 		src/gc.c
 OBJ = $(SRC:.c=.o)
 
