@@ -6,7 +6,7 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 21:39:34 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/06/27 18:31:02 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/06/28 14:23:06 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	close_window(void *param)
 	vars = (t_vars *)param;
 	if(vars->carte)
 		kill_img_all(vars);
+	if(vars->pos->player)
+		mlx_destroy_image(vars->mlx, vars->pos->player);
 	if (vars->mlx && vars->win)
 		mlx_destroy_window(vars->mlx, vars->win);
 	if (vars->mlx)

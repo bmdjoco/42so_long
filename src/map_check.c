@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_check_re.c                                     :+:      :+:    :+:   */
+/*   map_check.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -36,7 +36,7 @@ int	check_size(char *file)
 /**
  * @brief renvoie 1 si il n'y a que des mur aux bord de la map ou 0
  */
-int	check_bord_re(t_map_re *carte)
+int	check_bord(t_map *carte)
 {
 	int	i;
 	int	j;
@@ -61,7 +61,7 @@ int	check_bord_re(t_map_re *carte)
 /**
  * @brief renvoie 1 si il n'y qu'une seul entre et sortie ou 0
  */
-int	check_in_out_re(t_map_re	*carte)
+int	check_in_out(t_map	*carte)
 {
 	int	i;
 	int	j;
@@ -85,4 +85,42 @@ int	check_in_out_re(t_map_re	*carte)
 		i++;
 	}
 	return (nb_i == 1 && nb_o == 1);
+}
+
+t_pos	*get_pos(t_map	*carte)
+{
+	int		i;
+	int		j;
+	t_pos	*pos;
+
+	i = 0;
+	pos = (t_pos *) gc_malloc(sizeof(t_pos));
+	while (i < carte->height)
+	{
+		j = 0;
+		while (j < carte->width)
+		{
+			if (carte->map[i][j].s == 'P')
+			{
+				pos->x = j;
+				pos->y = i;
+				return (pos);
+			}
+			j++;
+		}
+		i++;
+	}
+	return (NULL);
+}
+
+int	put_player(t_vars *vars)
+{
+	int	t_size;
+
+	t_size = 50;
+	vars->pos->player = mlx_xpm_file_to_image(vars->mlx, "assets/img/player/down1.xpm", &t_size, &t_size);
+	if(!vars->pos->player)
+		return (close_window(vars), 0);
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->pos->player, vars->pos->x * t_size, vars->pos->y * t_size);
+	return (1);
 }

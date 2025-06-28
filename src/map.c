@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_re.c                                           :+:      :+:    :+:   */
+/*   map.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,14 +12,14 @@
 
 #include "../so_long.h"
 
-static t_map_re	*alloc_carte_re(int *fd, char *file)
+static t_map	*alloc_carte(int *fd, char *file)
 {
-	t_map_re	*carte;
+	t_map	*carte;
 
 	*fd = open(file, O_RDONLY);
 	if (*fd == -1)
 		return (ft_printf("fd error\n"), NULL);
-	carte = (t_map_re *) gc_malloc(sizeof(t_map_re));
+	carte = (t_map *) gc_malloc(sizeof(t_map));
 	if(!carte)
 		return (NULL);
 	carte->height = get_nb_line(file);
@@ -42,7 +42,7 @@ static int	is_auth(char c)
 	return (0);
 }
 
-static int	write_line(t_map_re *carte, int nb_l, int fd)
+static int	write_line(t_map *carte, int nb_l, int fd)
 {
 	int		i;
 	char	*res;
@@ -66,21 +66,21 @@ static int	write_line(t_map_re *carte, int nb_l, int fd)
 	return (1);
 }
 
-t_map_re	*init_map_re(char *file)
+t_map	*init_map(char *file)
 {
-	t_map_re	*carte;
+	t_map	*carte;
 	int		fd;
 	int		l;
 
 	if (!check_size(file))
 		return (NULL);
-	carte = alloc_carte_re(&fd, file);
+	carte = alloc_carte(&fd, file);
 	if (!carte)
 		return (NULL);
 	l = 0;
 	while (write_line(carte, l, fd))
 		l++;
-	if (!check_in_out_re(carte) || !check_bord_re(carte))
+	if (!check_in_out(carte) || !check_bord(carte))
 		return (NULL);
 	return (carte);
 }
