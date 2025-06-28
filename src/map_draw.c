@@ -6,7 +6,7 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 15:22:24 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/06/27 16:01:33 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/06/28 17:51:45 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	draw_map(t_vars *vars)
 			(*vars).carte->map[i][j].img = get_image(vars, (*vars).carte->map[i][j].s);
 			if (!(*vars).carte->map[i][j].img)
 				close_window(vars);
-			mlx_put_image_to_window((*vars).mlx, (*vars).win, (*vars).carte->map[i][j].img, j * 50, i * 50);
+			put_img_win(vars, j, i, 'm');
 			j++;
 		}
 		i++;

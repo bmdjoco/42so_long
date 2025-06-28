@@ -6,7 +6,7 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:12:23 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/06/28 17:29:13 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/06/28 17:40:56 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,13 @@ static void	init_vars(t_vars *vars)
 int main(void)
 {
 	t_vars	vars;
-	int		t_size;
 
 	init_vars(&vars);
 	vars.mlx = mlx_init();
 	vars.carte = init_map("assets/map.ber");
 	if (!vars.carte)
 		return(close_window(&vars));
-	t_size = 50;
-	vars.win = mlx_new_window(vars.mlx, vars.carte->width * t_size, vars.carte->height * t_size, "So Long");
+	vars.win = mlx_new_window(vars.mlx, vars.carte->width * TYLE_SIZE, vars.carte->height * TYLE_SIZE, "So Long");
 	draw_map(&vars);
 	vars.pos = get_pos(vars.carte);
 	if (!vars.pos)

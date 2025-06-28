@@ -6,11 +6,22 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 15:52:31 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/06/28 16:25:07 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/06/28 17:51:18 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
+
+void	put_img_win(t_vars *vars, int x, int y, char c)
+{
+	void	*img;
+
+	if (c == 'p')
+		img = vars->pos->player;
+	else
+		img = vars->carte->map[y][x].img;
+	mlx_put_image_to_window(vars->mlx, vars->win, img, x * TYLE_SIZE, y *TYLE_SIZE);
+}
 
 void	is_drop_case(t_vars *vars, int x, int y)
 {
@@ -25,9 +36,9 @@ void	is_drop_case(t_vars *vars, int x, int y)
 	vars->carte->map[y_pos][x_pos].img = get_image(vars, vars->carte->map[y_pos][x_pos].s);
 	if (!vars->carte->map[y_pos][x_pos].img)
 		close_window(vars);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->carte->map[y_pos][x_pos].img, x_pos * 50, y_pos * 50);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->pos->player, x_pos * 50, y_pos * 50);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->carte->map[y_pos - y][x_pos - x].img, (x_pos - x) * 50, (y_pos - y) * 50);
+	put_img_win(vars, x_pos, y_pos, 'm');
+	put_img_win(vars, x_pos, y_pos, 'p');
+	put_img_win(vars, x_pos - x, y_pos - y, 'm');
 	vars->pos->x += x;
 	vars->pos->y += y;
 }
@@ -39,8 +50,8 @@ void	is_movable_case(t_vars *vars, int x, int y)
 
 	x_pos = vars->pos->x + x;
 	y_pos = vars->pos->y + y;
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->pos->player, x_pos * 50, y_pos * 50);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->carte->map[y_pos - y][x_pos - x].img, (x_pos - x) * 50, (y_pos - y) * 50);
+	put_img_win(vars, x_pos, y_pos, 'p');
+	put_img_win(vars, x_pos - x, y_pos - y, 'm');
 	vars->pos->x += x;
 	vars->pos->y += y;
 }

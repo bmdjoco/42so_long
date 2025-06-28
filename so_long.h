@@ -6,7 +6,7 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:11:40 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/06/28 17:28:08 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/06/28 17:49:58 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <X11/keysym.h>
+
+# ifndef TYLE_SIZE
+#  define TYLE_SIZE 64
+# endif
 
 typedef struct	s_slot {
 	void	*img;
@@ -68,6 +72,7 @@ void	draw_map(t_vars *vars);
 void	*gc_malloc(size_t size);
 void	kill_img_all(t_vars *vars);
 void	*get_image(t_vars *vars, char c);
+void	put_img_win(t_vars *vars, int x, int y, char c);
 void	is_drop_case(t_vars *vars, int x, int y);
 void	is_movable_case(t_vars *vars, int x, int y);
 

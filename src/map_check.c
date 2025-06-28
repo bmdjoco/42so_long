@@ -115,12 +115,9 @@ t_pos	*get_pos(t_map	*carte)
 
 int	put_player(t_vars *vars)
 {
-	int	t_size;
-
-	t_size = 50;
-	vars->pos->player = mlx_xpm_file_to_image(vars->mlx, "assets/img/player/down1.xpm", &t_size, &t_size);
+	vars->pos->player = mlx_xpm_file_to_image(vars->mlx, "assets/img/player/down1.xpm", TYLE_SIZE, TYLE_SIZE);
 	if(!vars->pos->player)
 		return (close_window(vars), 0);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->pos->player, vars->pos->x * t_size, vars->pos->y * t_size);
+	put_img_win(vars, vars->pos->x, vars->pos->y, 'p');
 	return (1);
 }
