@@ -6,7 +6,7 @@
 #    By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/17 14:30:37 by bdjoco            #+#    #+#              #
-#    Updated: 2025/06/28 16:23:06 by bdjoco           ###   ########.fr        #
+#    Updated: 2025/07/05 12:16:05 by bdjoco           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = so_long
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -Ilib/mlx
+CFLAGS = -Wall -Wextra -Werror -Ilib/mlx -g3
 MLXFLAGS = -L$(MLX) -lmlx_Linux -lXext -lX11
 
 LIBFT = lib/libft/

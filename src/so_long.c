@@ -6,7 +6,7 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:12:23 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/06/28 17:40:56 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/07/05 12:14:05 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,18 @@ static void	init_vars(t_vars *vars)
 int main(void)
 {
 	t_vars	vars;
+	int		s_width;
+	int		s_height;
 
 	init_vars(&vars);
 	vars.mlx = mlx_init();
 	vars.carte = init_map("assets/map.ber");
 	if (!vars.carte)
 		return(close_window(&vars));
+	mlx_get_screen_size(vars.mlx, &s_width, &s_height);
+	if (s_width < vars.carte->width * TYLE_SIZE
+		|| s_height < vars.carte->height * TYLE_SIZE)
+		return (ft_putstr_fd("Error: map too big\n", 2), close_window(&vars));
 	vars.win = mlx_new_window(vars.mlx, vars.carte->width * TYLE_SIZE, vars.carte->height * TYLE_SIZE, "So Long");
 	draw_map(&vars);
 	vars.pos = get_pos(vars.carte);
