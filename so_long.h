@@ -6,7 +6,7 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:11:40 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/06/28 17:49:58 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/07/05 14:27:00 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_gc_node {
 	struct	s_gc_node *next;
 } t_gc_node;
 
+/**/
 typedef struct	s_pos {
 	int		x;
 	int		y;

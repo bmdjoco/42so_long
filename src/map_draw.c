@@ -6,7 +6,7 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 15:22:24 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/06/28 17:51:45 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/07/05 14:26:46 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,9 @@ void	draw_map(t_vars *vars)
 		}
 		i++;
 	}
+}
+
+t_pos	*get_outdoor_pos(vars)
+{
+	t_pos	outdoor;
 }

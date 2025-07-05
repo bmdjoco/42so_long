@@ -6,7 +6,7 @@
 #    By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/17 14:30:37 by bdjoco            #+#    #+#              #
-#    Updated: 2025/07/05 12:16:05 by bdjoco           ###   ########.fr        #
+#    Updated: 2025/07/05 14:22:50 by bdjoco           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRC = src/so_long.c \
 		src/error.c \
 		src/map.c \
 		src/map_check.c \
+		src/map_utils.c \
 		src/go_next_line.c \
 		src/map_draw.c \
 		src/game.c \
