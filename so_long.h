@@ -6,7 +6,7 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:11:40 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/07/05 14:27:00 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/07/09 18:19:16 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ int		close_window(void *param);
 int		check_in_out(t_map	*carte);
 int		move(t_vars *vars, int x, int y);
 
+char	**to_char_map(t_map *carte);
+
 void	gc_free_all(void);
 void	print_map(char **map);
 void	end_game(t_vars *vars);
@@ -73,9 +75,11 @@ void	draw_map(t_vars *vars);
 void	*gc_malloc(size_t size);
 void	kill_img_all(t_vars *vars);
 void	*get_image(t_vars *vars, char c);
-void	put_img_win(t_vars *vars, int x, int y, char c);
 void	is_drop_case(t_vars *vars, int x, int y);
 void	is_movable_case(t_vars *vars, int x, int y);
+void	put_img_win(t_vars *vars, int x, int y, char c);
+void	floodfil_pv(char **map, int i, int j, int height, int *score);
+
 
 t_map	*init_map(char *file);
 

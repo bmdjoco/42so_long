@@ -69,8 +69,11 @@ static int	write_line(t_map *carte, int nb_l, int fd)
 t_map	*init_map(char *file)
 {
 	t_map	*carte;
+	char	**tab;
 	int		fd;
 	int		l;
+	int		score;
+	t_pos	*pos;
 
 	if (!check_size(file))
 		return (NULL);
@@ -80,7 +83,12 @@ t_map	*init_map(char *file)
 	l = 0;
 	while (write_line(carte, l, fd))
 		l++;
-	if (!check_in_out(carte) || !check_bord(carte))
+		if (!check_in_out(carte) || !check_bord(carte))
 		return (NULL);
-	return (carte);
+	tab = to_char_map(carte);
+	if(!tab)
+		return (NULL);
+	pos = get_pos(carte);
+	floodfil_pv(tab, pos->x, pos->y, carte->height, &score);
+	return (free(pos), carte);
 }
