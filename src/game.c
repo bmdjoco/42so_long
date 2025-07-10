@@ -6,20 +6,20 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 13:08:33 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/06/28 17:29:51 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/07/10 13:35:36 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-void	end_game(t_vars *vars)
+void	end_game(t_game *vars)
 {
 	ft_printf("Score : %d pts.\n", vars->score);
 	close_window(vars);
 }
 
 
-int	move(t_vars *vars, int x, int y)
+int	move(t_game *vars, int x, int y)
 {
 	int	x_pos;
 	int	y_pos;

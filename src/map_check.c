@@ -113,7 +113,7 @@ t_pos	*get_pos(t_map	*carte)
 	return (NULL);
 }
 
-int	put_player(t_vars *vars)
+int	put_player(t_game *vars)
 {
 	int	sityle;
 

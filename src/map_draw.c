@@ -6,13 +6,13 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 15:22:24 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/07/09 15:56:44 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/07/10 13:32:56 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-void	*get_image(t_vars *vars, char c)
+void	*get_image(t_game *vars, char c)
 {
 	int	t_size;
 
@@ -29,7 +29,7 @@ void	*get_image(t_vars *vars, char c)
 		return (mlx_xpm_file_to_image((*vars).mlx, "assets/img/drop.xpm", &t_size, &t_size));
 }
 
-void	kill_img_all(t_vars *vars)
+void	kill_img_all(t_game *vars)
 {
 	int	i;
 	int	j;
@@ -48,7 +48,7 @@ void	kill_img_all(t_vars *vars)
 	}
 }
 
-void	draw_map(t_vars *vars)
+void	draw_map(t_game *vars)
 {
 	int	i;
 	int	j;

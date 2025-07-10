@@ -6,7 +6,7 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:12:23 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/07/09 18:13:34 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/07/10 13:32:30 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	key_press(int key, void *param)
 {
-	t_vars	*vars;
+	t_game	*vars;
 
-	vars = (t_vars *)param;
+	vars = (t_game *)param;
 	if (key == XK_Up || key == XK_w)
 		move(vars, 0, -1);
 	else if (key == XK_Down || key == XK_s)
@@ -30,7 +30,7 @@ int	key_press(int key, void *param)
 	return (0);
 }
 
-static void	init_vars(t_vars *vars)
+static void	init_vars(t_game *vars)
 {
 	vars->mlx = NULL;
 	vars->win = NULL;
@@ -41,7 +41,7 @@ static void	init_vars(t_vars *vars)
 
 int main(void)
 {
-	t_vars	vars;
+	t_game	vars;
 	int		s_width;
 	int		s_height;
 

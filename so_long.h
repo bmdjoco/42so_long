@@ -6,7 +6,7 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:11:40 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/07/09 18:19:16 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/07/10 13:32:19 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct	s_slot {
 typedef struct	s_map {
 	int		width;
 	int		height;
+	int		getable;
 	t_slot	**map;
 }				t_map;
 
@@ -49,35 +50,35 @@ typedef struct	s_pos {
 	void	*player;
 }				t_pos;
 
-typedef struct	s_vars {
+typedef struct	s_game {
 	int		score;
 	void	*mlx;
 	void	*win;
 	t_map	*carte;
 	t_pos	*pos;
-}				t_vars;
+}				t_game;
 
 int		check_size(char *file);
 int		get_lenght(char *file);
 int		get_nb_line(char *file);
-int		put_player(t_vars *vars);
+int		put_player(t_game *vars);
 int		check_bord(t_map *carte);
 int		close_window(void *param);
 int		check_in_out(t_map	*carte);
-int		move(t_vars *vars, int x, int y);
+int		move(t_game *vars, int x, int y);
 
 char	**to_char_map(t_map *carte);
 
 void	gc_free_all(void);
 void	print_map(char **map);
-void	end_game(t_vars *vars);
-void	draw_map(t_vars *vars);
+void	end_game(t_game *vars);
+void	draw_map(t_game *vars);
 void	*gc_malloc(size_t size);
-void	kill_img_all(t_vars *vars);
-void	*get_image(t_vars *vars, char c);
-void	is_drop_case(t_vars *vars, int x, int y);
-void	is_movable_case(t_vars *vars, int x, int y);
-void	put_img_win(t_vars *vars, int x, int y, char c);
+void	kill_img_all(t_game *vars);
+void	*get_image(t_game *vars, char c);
+void	is_drop_case(t_game *vars, int x, int y);
+void	is_movable_case(t_game *vars, int x, int y);
+void	put_img_win(t_game *vars, int x, int y, char c);
 void	floodfil_pv(char **map, int i, int j, int height, int *score);
 
 

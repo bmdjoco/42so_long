@@ -6,7 +6,7 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 21:39:34 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/07/05 12:15:24 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/07/10 13:35:40 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	close_window(void *param)
 {
-	t_vars	*vars;
+	t_game	*vars;
 
-	vars = (t_vars *)param;
+	vars = (t_game *)param;
 	if(vars->carte)
 		kill_img_all(vars);
 	if(vars->pos && vars->pos->player)

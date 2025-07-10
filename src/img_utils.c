@@ -6,13 +6,13 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 15:52:31 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/07/04 12:53:32 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/07/10 13:37:37 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-void	put_img_win(t_vars *vars, int x, int y, char c)
+void	put_img_win(t_game *vars, int x, int y, char c)
 {
 	void	*img;
 
@@ -23,7 +23,7 @@ void	put_img_win(t_vars *vars, int x, int y, char c)
 	mlx_put_image_to_window(vars->mlx, vars->win, img, x * TYLE_SIZE, y *TYLE_SIZE);
 }
 
-void	is_drop_case(t_vars *vars, int x, int y)
+void	is_drop_case(t_game *vars, int x, int y)
 {
 	int	x_pos;
 	int	y_pos;
@@ -43,7 +43,7 @@ void	is_drop_case(t_vars *vars, int x, int y)
 	vars->pos->y += y;
 }
 
-void	is_movable_case(t_vars *vars, int x, int y)
+void	is_movable_case(t_game *vars, int x, int y)
 {
 	int	x_pos;
 	int	y_pos;

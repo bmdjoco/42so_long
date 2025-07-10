@@ -88,6 +88,7 @@ t_map	*init_map(char *file)
 	tab = to_char_map(carte);
 	if(!tab)
 		return (NULL);
+	map.
 	pos = get_pos(carte);
 	floodfil_pv(tab, pos->x, pos->y, carte->height, &score);
 	return (free(pos), carte);
