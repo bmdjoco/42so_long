@@ -6,7 +6,7 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:11:40 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/07/10 13:32:19 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/07/11 11:14:17 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ typedef struct	s_slot {
 typedef struct	s_map {
 	int		width;
 	int		height;
-	int		getable;
 	t_slot	**map;
 }				t_map;
 
@@ -63,6 +62,7 @@ int		get_lenght(char *file);
 int		get_nb_line(char *file);
 int		put_player(t_game *vars);
 int		check_bord(t_map *carte);
+int		is_necessary(char **map);
 int		close_window(void *param);
 int		check_in_out(t_map	*carte);
 int		move(t_game *vars, int x, int y);
@@ -75,6 +75,8 @@ void	end_game(t_game *vars);
 void	draw_map(t_game *vars);
 void	*gc_malloc(size_t size);
 void	kill_img_all(t_game *vars);
+void	free_dtab(char **tab, int i);
+void	free_tmap(t_slot **tab, int i);
 void	*get_image(t_game *vars, char c);
 void	is_drop_case(t_game *vars, int x, int y);
 void	is_movable_case(t_game *vars, int x, int y);

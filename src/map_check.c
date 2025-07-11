@@ -94,7 +94,9 @@ t_pos	*get_pos(t_map	*carte)
 	t_pos	*pos;
 
 	i = 0;
-	pos = (t_pos *) gc_malloc(sizeof(t_pos));
+	pos = (t_pos *) malloc(sizeof(t_pos));
+	if(!pos)
+		return (free_tmap(carte->map, carte->height - 1), free(carte), NULL);
 	while (i < carte->height)
 	{
 		j = 0;
@@ -110,7 +112,7 @@ t_pos	*get_pos(t_map	*carte)
 		}
 		i++;
 	}
-	return (NULL);
+	return (free_tmap(carte->map, carte->height - 1), free(carte), free(pos), NULL);
 }
 
 int	put_player(t_game *vars)

@@ -6,7 +6,7 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 12:28:38 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/06/27 15:18:33 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/07/11 11:25:44 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int	get_nb_line(char *file)
 	nb = 0;
 	while (go_next_line(fd))
 		nb++;
+	close(fd);
 	return (nb);
 }
 /**
@@ -99,16 +100,17 @@ int	get_lenght(char *file)
 		return (ft_printf("fd error\n"), -1);
 	str = get_next_line(fd);
 	if (!str)
-		return (-1);
+		return (close(fd), -1);
 	len = ft_strlen(str);
 	free(str);
 	str = get_next_line(fd);
 	while (str)
 	{
 		if(len != (int) ft_strlen(str))
-			return (free(str), -1);
+			return (close(fd), free(str), -1);
 		free(str);
 		str = get_next_line(fd);
 	}
+	close(fd);
 	return (len - 1);
 }

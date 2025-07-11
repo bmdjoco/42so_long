@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/24 21:39:34 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/07/11 11:44:48 by bdjoco           ###   ########.fr       */
+/*   Created: 2025/07/11 10:38:40 by bdjoco            #+#    #+#             */
+/*   Updated: 2025/07/11 11:13:01 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-int	close_window(void *param)
+void	free_tmap(t_slot **tab, int i)
 {
-	t_game	*game;
-
-	game = (t_game *)param;
-	if (!game)
-		exit(1);
-	if(game->carte)
-		kill_img_all(game);
-	if(game->pos && game->pos->player)
-		mlx_destroy_image(game->mlx, game->pos->player);
-	if (game->mlx)
+	while(i >= 0)
 	{
-		if (game->win)
-			mlx_destroy_window(game->mlx, game->win);
-		mlx_destroy_display(game->mlx);
-		free(game->mlx);
+		free(tab[i]);
+		i--;
 	}
-	exit(0);
-	return (0);
+	free(tab);
+}
+
+void	free_dtab(char **tab, int i)
+{
+	while(i >= 0)
+	{
+		free(tab[i]);
+		i--;
+	}
+	free(tab);
 }

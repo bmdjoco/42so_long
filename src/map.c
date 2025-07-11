@@ -19,18 +19,18 @@ static t_map	*alloc_carte(int *fd, char *file)
 	*fd = open(file, O_RDONLY);
 	if (*fd == -1)
 		return (ft_printf("fd error\n"), NULL);
-	carte = (t_map *) gc_malloc(sizeof(t_map));
+	carte = (t_map *) malloc(sizeof(t_map));
 	if(!carte)
 		return (NULL);
 	carte->height = get_nb_line(file);
 	if (carte->height == -1)
-		return (NULL);
+		return (free(carte), NULL);
 	carte->width = get_lenght(file);
 	if (carte->width == -1)
-		return (NULL);
-	carte->map = (t_slot **) gc_malloc(sizeof(t_slot *) * (carte->height));
+		return (free(carte), NULL);
+	carte->map = (t_slot **) malloc(sizeof(t_slot *) * (carte->height));
 	if (!carte->map)
-		return (NULL);
+		return (free(carte), NULL);
 	return (carte);
 }
 
@@ -50,14 +50,14 @@ static int	write_line(t_map *carte, int nb_l, int fd)
 	res = get_next_line(fd);
 	if (!res)
 		return (0);
-	carte->map[nb_l] = (t_slot *) gc_malloc(sizeof(t_slot) * (carte->width));
-	if (!carte->map[nb_l])
-		return (free(res), 0);
+	carte->map[nb_l] = (t_slot *) malloc(sizeof(t_slot) * (carte->width));
 	i = 0;
+	if (!carte->map[nb_l])
+		return (free_tmap(carte->map, i - 1), free(carte), free(res), 0);
 	while (res[i] && res[i] != '\n')
 	{
 		if (!is_auth(res[i]))
-			return (free(res), 0);
+			return (free_tmap(carte->map, i), free(carte), free(res), 0);
 		carte->map[nb_l][i].s = res[i];
 		carte->map[nb_l][i].img = NULL;
 		i++;
@@ -66,14 +66,27 @@ static int	write_line(t_map *carte, int nb_l, int fd)
 	return (1);
 }
 
+static t_map	*init_map_end(t_map *carte, char **tab)
+{
+	t_pos	*pos;
+	int		score;
+
+	score = 0;
+	pos = get_pos(carte);
+	if (!pos)
+		return (NULL);
+	floodfil_pv(tab, pos->x, pos->y, carte->height, &score);
+	if (score != is_necessary(tab))
+		return (free_tmap(carte->map, carte->height - 1), free(carte), free(pos), NULL);
+	return (free(pos), carte);
+}
+
 t_map	*init_map(char *file)
 {
 	t_map	*carte;
 	char	**tab;
 	int		fd;
 	int		l;
-	int		score;
-	t_pos	*pos;
 
 	if (!check_size(file))
 		return (NULL);
@@ -83,13 +96,10 @@ t_map	*init_map(char *file)
 	l = 0;
 	while (write_line(carte, l, fd))
 		l++;
-		if (!check_in_out(carte) || !check_bord(carte))
+	if (!check_in_out(carte) || !check_bord(carte))
 		return (NULL);
 	tab = to_char_map(carte);
 	if(!tab)
 		return (NULL);
-	map.
-	pos = get_pos(carte);
-	floodfil_pv(tab, pos->x, pos->y, carte->height, &score);
-	return (free(pos), carte);
+	return (init_map_end(carte, tab));
 }

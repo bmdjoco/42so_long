@@ -6,7 +6,7 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:12:23 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/07/10 13:32:30 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/07/11 11:46:28 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,54 +14,62 @@
 
 int	key_press(int key, void *param)
 {
-	t_game	*vars;
+	t_game	*game;
 
-	vars = (t_game *)param;
+	game = (t_game *)param;
 	if (key == XK_Up || key == XK_w)
-		move(vars, 0, -1);
+		move(game, 0, -1);
 	else if (key == XK_Down || key == XK_s)
-		move(vars, 0, 1);
+		move(game, 0, 1);
 	else if (key == XK_Left || key == XK_a)
-		move(vars, -1, 0);
+		move(game, -1, 0);
 	else if (key == XK_Right || key == XK_d)
-		move(vars, 1, 0);
+		move(game, 1, 0);
 	else if (key == XK_Escape)
-		return (ft_printf("Close\n"), close_window(vars));
+		return (ft_printf("Close\n"), close_window(game));
 	return (0);
 }
 
-static void	init_vars(t_game *vars)
+static void	init_game(t_game *game)
 {
-	vars->mlx = NULL;
-	vars->win = NULL;
-	vars->carte = NULL;
-	vars->score = 0;
-	vars->pos = NULL;
+	game->mlx = NULL;
+	game->win = NULL;
+	game->carte = NULL;
+	game->score = 0;
+	game->pos = NULL;
+}
+
+static int	define_game(t_game *game)
+{
+	int		s_width;
+	int		s_height;
+
+	game->mlx = mlx_init();
+	game->carte = init_map("../assets/map.ber");
+	if (!game->carte)
+		return(close_window(&game));
+	mlx_get_screen_size(game->mlx, &s_width, &s_height);
+	if (s_width < game->carte->width * TYLE_SIZE
+		|| s_height < game->carte->height * TYLE_SIZE)
+		return (ft_putstr_fd("Error: map too big\n", 2), close_window(&game));
+	game->win = mlx_new_window(game->mlx, game->carte->width * TYLE_SIZE,
+		game->carte->height * TYLE_SIZE, "So Long");
+	draw_map(game);
+	game->pos = get_pos(game->carte);
+	if (!game->pos)
+		return(close_window(&game));
+	put_player(game);
+	return (1);
 }
 
 int main(void)
 {
-	t_game	vars;
-	int		s_width;
-	int		s_height;
+	t_game	game;
 
-	init_vars(&vars);
-	vars.mlx = mlx_init();
-	vars.carte = init_map("assets/map.ber");
-	if (!vars.carte)
-		return(close_window(&vars));
-	mlx_get_screen_size(vars.mlx, &s_width, &s_height);
-	if (s_width < vars.carte->width * TYLE_SIZE
-		|| s_height < vars.carte->height * TYLE_SIZE)
-		return (ft_putstr_fd("Error: map too big\n", 2), close_window(&vars));
-	vars.win = mlx_new_window(vars.mlx, vars.carte->width * TYLE_SIZE, vars.carte->height * TYLE_SIZE, "So Long");
-	draw_map(&vars);
-	vars.pos = get_pos(vars.carte);
-	if (!vars.pos)
-		return(close_window(&vars));
-	put_player(&vars);
-	mlx_hook(vars.win, 2, 1L << 0, key_press, &vars);
-	mlx_hook(vars.win, 17, 0L, close_window, &vars);
-	mlx_loop(vars.mlx);
+	init_game(&game);
+	define_game(&game);
+	mlx_hook(game.win, 2, 1L << 0, key_press, &game);
+	mlx_hook(game.win, 17, 0L, close_window, &game);
+	mlx_loop(game.mlx);
 	return (0);
 }
