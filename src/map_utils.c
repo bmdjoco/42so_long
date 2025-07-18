@@ -6,7 +6,7 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 14:22:19 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/07/11 11:15:38 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/07/18 16:04:53 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,30 +40,36 @@ char	**to_char_map(t_map *carte)
 	return (res);
 }
 
-void	floodfil_pv(char **map, int i, int j, int height, int *score)
+char	newchar(char c)
+{
+	if (c >= 'A' && c <= 'Z')
+		return (c + 32);
+	else
+		return ('o');
+}
+
+void	floodfil_pv(char **map, int j, int i, int height)
 {
 	int	lenght;
 
-	if(!map[i])
+	if(!map[0])
 		return ;
-	lenght = strlen(map[i]);
-	if ((i < height && j < lenght) || map[i][j] == '1')
+	lenght = ft_strlen(map[i]);
+	if (i >= height || j >= lenght || i < 0 || j < 0 || map[i][j] == '1'
+		|| map[i][j] == 'o' || (map[i][j] >= 'a' && map[i][j] <= 'z'))
 		return ;
-	if(map[i][j] == 'C' || map[i][j] == 'E')
-		*score = *score + 1;
-	floodfil_pv(map, i - 1, j, height, score);
-	floodfil_pv(map, i + 1, j, height, score);
-	floodfil_pv(map, i, j - 1, height, score);
-	floodfil_pv(map, i, j + 1, height, score);
+	map[i][j] = newchar(map[i][j]);
+	floodfil_pv(map, j - 1, i, height);
+	floodfil_pv(map, j + 1, i, height);
+	floodfil_pv(map, j, i - 1, height);
+	floodfil_pv(map, j, i + 1, height);
 }
 
-int	is_necessary(char **map)
+int	can_access(char **map)
 {
 	int		i;
 	int		j;
-	int		res;
 
-	res = 0;
 	i = 0;
 	while (map[i])
 	{
@@ -71,10 +77,10 @@ int	is_necessary(char **map)
 		while (map[i][j])
 		{
 			if (map[i][j] == 'C' || map[i][j] == 'E')
-				res++;
+				return (0);
 			j++;
 		}
 		i++;
 	}
-	return (res);
+	return (1);
 }

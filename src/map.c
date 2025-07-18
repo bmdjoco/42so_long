@@ -18,7 +18,7 @@ static t_map	*alloc_carte(int *fd, char *file)
 
 	*fd = open(file, O_RDONLY);
 	if (*fd == -1)
-		return (ft_printf("fd error\n"), NULL);
+		return (ft_printf("fd error\n"), close(*fd), NULL);
 	carte = (t_map *) malloc(sizeof(t_map));
 	if(!carte)
 		return (NULL);
@@ -69,16 +69,19 @@ static int	write_line(t_map *carte, int nb_l, int fd)
 static t_map	*init_map_end(t_map *carte, char **tab)
 {
 	t_pos	*pos;
-	int		score;
+	int		*score;
 
 	score = 0;
 	pos = get_pos(carte);
 	if (!pos)
-		return (NULL);
-	floodfil_pv(tab, pos->x, pos->y, carte->height, &score);
-	if (score != is_necessary(tab))
-		return (free_tmap(carte->map, carte->height - 1), free(carte), free(pos), NULL);
-	return (free(pos), carte);
+		return (free_tmap(carte->map, carte->height - 1),
+			free_dtab(tab, carte->height - 1), free(carte), NULL);
+	floodfil_pv(tab, pos->x, pos->y, carte->height);
+	if (!can_access(tab))
+		return (free_tmap(carte->map, carte->height - 1),
+			free_dtab(tab, carte->height - 1), free(carte), free(pos),
+			ft_putstr_fd("Error: Map non valid\n", 2), NULL);
+	return (free(pos), free_dtab(tab, carte->height - 1), carte);
 }
 
 t_map	*init_map(char *file)

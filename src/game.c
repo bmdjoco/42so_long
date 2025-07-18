@@ -6,37 +6,37 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 13:08:33 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/07/10 13:35:36 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/07/13 12:04:28 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-void	end_game(t_game *vars)
+void	end_game(t_game *game)
 {
-	ft_printf("Score : %d pts.\n", vars->score);
-	close_window(vars);
+	ft_printf("Score : %d pts.\n", game->score);
+	close_window(game);
 }
 
 
-int	move(t_game *vars, int x, int y)
+int	move(t_game *game, int x, int y)
 {
 	int	x_pos;
 	int	y_pos;
 
-	x_pos = vars->pos->x;
-	y_pos = vars->pos->y;
-	if (x_pos + x <= 0 || x_pos + x >= vars->carte->width - 1
-		|| y_pos + y <= 0 || y_pos + y >= vars->carte->height - 1)
+	x_pos = game->pos->x;
+	y_pos = game->pos->y;
+	if (x_pos + x <= 0 || x_pos + x >= game->carte->width - 1
+		|| y_pos + y <= 0 || y_pos + y >= game->carte->height - 1)
 		return(0);
-	if (vars->carte->map[y_pos + y][x_pos + x].s == '1')
+	if (game->carte->map[y_pos + y][x_pos + x].s == '1')
 		return (0);
-	else if (vars->carte->map[y_pos + y][x_pos + x].s == 'C')
-		is_drop_case(vars, x, y);
-	else if (vars->carte->map[y_pos + y][x_pos + x].s == '0'
-		|| vars->carte->map[y_pos + y][x_pos + x].s == 'P')
-		is_movable_case(vars, x, y);
-	else if (vars->carte->map[y_pos + y][x_pos + x].s == 'E')
-		end_game(vars);
+	else if (game->carte->map[y_pos + y][x_pos + x].s == 'C')
+		is_drop_case(game, x, y);
+	else if (game->carte->map[y_pos + y][x_pos + x].s == '0'
+		|| game->carte->map[y_pos + y][x_pos + x].s == 'P')
+		is_movable_case(game, x, y);
+	else if (game->carte->map[y_pos + y][x_pos + x].s == 'E')
+		end_game(game);
 	return (1);
 }

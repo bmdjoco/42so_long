@@ -6,7 +6,7 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:12:23 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/07/11 11:46:28 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/07/18 16:07:09 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	key_press(int key, void *param)
 	else if (key == XK_Right || key == XK_d)
 		move(game, 1, 0);
 	else if (key == XK_Escape)
-		return (ft_printf("Close\n"), close_window(game));
+		return (close_window(game));
 	return (0);
 }
 
@@ -45,13 +45,16 @@ static int	define_game(t_game *game)
 	int		s_height;
 
 	game->mlx = mlx_init();
-	game->carte = init_map("../assets/map.ber");
+	if (!game->mlx)
+		return (0);
+	game->carte = init_map("assets/map.ber");
 	if (!game->carte)
-		return(close_window(&game));
+		return(mlx_destroy_display(game->mlx), free(game->mlx), exit(0), 0);
 	mlx_get_screen_size(game->mlx, &s_width, &s_height);
 	if (s_width < game->carte->width * TYLE_SIZE
 		|| s_height < game->carte->height * TYLE_SIZE)
-		return (ft_putstr_fd("Error: map too big\n", 2), close_window(&game));
+		return (ft_putstr_fd("Error: map too big\n", 2),
+			mlx_destroy_display(game->mlx), free(game->mlx), exit(0), 0);
 	game->win = mlx_new_window(game->mlx, game->carte->width * TYLE_SIZE,
 		game->carte->height * TYLE_SIZE, "So Long");
 	draw_map(game);
