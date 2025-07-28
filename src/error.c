@@ -6,7 +6,7 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 21:39:34 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/07/13 12:49:11 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/07/28 15:20:59 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,17 @@ int	close_window(void *param)
 	game = (t_game *)param;
 	if (!game)
 		exit(0);
-	if(game->carte)
+	if (game->carte)
+	{
 		kill_img_all(game);
-	if(game->pos && game->pos->player)
+		free_tmap(game->carte->map, game->carte->height - 1);
+		free(game->carte);
+	}
+	if (game->pos && game->pos->player)
+	{
 		mlx_destroy_image(game->mlx, game->pos->player);
+		free(game->pos);
+	}
 	if (game->mlx)
 	{
 		if (game->win)

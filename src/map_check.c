@@ -25,9 +25,11 @@ int	check_size(char *file)
 		return (ft_printf("La map ne contien pas sufisament de ligne\n"), 0);
 	w = get_lenght(file);
 	if (w == -1)
-		return (ft_printf("La map contien des ligne de taille differente\n"), 0);
+		return (ft_printf("La map contien des ligne de taille differente\n"),
+			0);
 	else if (w < 3)
-		return (ft_printf("La map contien des ligne pas suffisament grande\n"), 0);
+		return (ft_printf("La map contien des ligne pas suffisament grande\n"),
+			0);
 	if (w < 5 && h < 5)
 		return (ft_printf("La map est trop petite\n"), 0);
 	return (1);
@@ -93,11 +95,12 @@ t_pos	*get_pos(t_map	*carte)
 	int		j;
 	t_pos	*pos;
 
-	i = 0;
+	i = -1;
 	pos = (t_pos *) malloc(sizeof(t_pos));
-	if(!pos)
-		return (free_tmap(carte->map, carte->height - 1), free(carte), NULL);
-	while (i < carte->height)
+	if (!pos)
+		return (free_tmap(carte->map, carte->height - 1),
+			free(carte), NULL);
+	while (++i < carte->height)
 	{
 		j = 0;
 		while (j < carte->width)
@@ -110,9 +113,9 @@ t_pos	*get_pos(t_map	*carte)
 			}
 			j++;
 		}
-		i++;
 	}
-	return (free_tmap(carte->map, carte->height - 1), free(carte), free(pos), NULL);
+	return (free_tmap(carte->map, carte->height - 1),
+		free(carte), free(pos), NULL);
 }
 
 int	put_player(t_game *game)
@@ -120,8 +123,9 @@ int	put_player(t_game *game)
 	int	sityle;
 
 	sityle = TYLE_SIZE;
-	game->pos->player = mlx_xpm_file_to_image(game->mlx, "assets/img/player/initial.xpm", &sityle, &sityle);
-	if(!game->pos->player)
+	game->pos->player = mlx_xpm_file_to_image(game->mlx,
+			"assets/img/player/initial.xpm", &sityle, &sityle);
+	if (!game->pos->player)
 		return (close_window(game), 0);
 	put_img_win(game, game->pos->x, game->pos->y, 'p');
 	return (1);

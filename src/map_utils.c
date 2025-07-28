@@ -6,7 +6,7 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 14:22:19 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/07/18 16:04:53 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/07/28 15:27:19 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	floodfil_pv(char **map, int j, int i, int height)
 {
 	int	lenght;
 
-	if(!map[0])
+	if (!map[0])
 		return ;
 	lenght = ft_strlen(map[i]);
 	if (i >= height || j >= lenght || i < 0 || j < 0 || map[i][j] == '1'

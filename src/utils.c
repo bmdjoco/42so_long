@@ -6,7 +6,7 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 10:38:40 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/07/13 13:40:22 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/07/28 15:27:09 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	free_tmap(t_slot **tab, int i)
 {
-	while(i >= 0)
+	while (i >= 0)
 	{
 		free(tab[i]);
 		i--;
@@ -24,7 +24,7 @@ void	free_tmap(t_slot **tab, int i)
 
 void	free_dtab(char **tab, int i)
 {
-	while(i >= 0)
+	while (i >= 0)
 	{
 		free(tab[i]);
 		i--;
@@ -34,8 +34,8 @@ void	free_dtab(char **tab, int i)
 
 void	print_map(char **map)
 {
-	int		i;
-	int		j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (map[i])

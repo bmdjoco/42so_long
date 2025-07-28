@@ -20,7 +20,7 @@ static t_map	*alloc_carte(int *fd, char *file)
 	if (*fd == -1)
 		return (ft_printf("fd error\n"), close(*fd), NULL);
 	carte = (t_map *) malloc(sizeof(t_map));
-	if(!carte)
+	if (!carte)
 		return (NULL);
 	carte->height = get_nb_line(file);
 	if (carte->height == -1)
@@ -102,7 +102,7 @@ t_map	*init_map(char *file)
 	if (!check_in_out(carte) || !check_bord(carte))
 		return (NULL);
 	tab = to_char_map(carte);
-	if(!tab)
+	if (!tab)
 		return (NULL);
 	return (init_map_end(carte, tab));
 }

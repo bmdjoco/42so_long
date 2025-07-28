@@ -6,7 +6,7 @@
 #    By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/17 14:30:37 by bdjoco            #+#    #+#              #
-#    Updated: 2025/07/11 11:28:45 by bdjoco           ###   ########.fr        #
+#    Updated: 2025/07/28 15:21:17 by bdjoco           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,8 +33,7 @@ SRC = src/so_long.c \
 		src/map_draw.c \
 		src/game.c \
 		src/img_utils.c \
-		src/utils.c \
-		src/gc.c
+		src/utils.c
 OBJ = $(SRC:.c=.o)
 
 LIBS = $(LIBFT)libft.a $(FT_PRINTF)libftprintf.a $(MLX)libmlx_Linux.a

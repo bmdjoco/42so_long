@@ -6,7 +6,7 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 12:28:38 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/07/11 11:25:44 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/07/28 15:22:38 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,12 @@ static int	go_next_line(int fd)
 	stash = n_stash;
 	return (1);
 }
+
 /**
  * @brief renvoie le nombre de ligne d'un fichier
  *
- * @return renvoie le nombre de ligne ou -1 dans le cas ou l'on arrive pas a acceder au fichier'
+ * @return renvoie le nombre de ligne ou -1 dans le cas
+ * ou l'on arrive pas a acceder au fichier'
  */
 int	get_nb_line(char *file)
 {
@@ -84,10 +86,12 @@ int	get_nb_line(char *file)
 	close(fd);
 	return (nb);
 }
+
 /**
  * @brief renvoie la taille des ligne d'un fichier
  *
- * @return renvoie la lenght sans le '\\n' ou -1 dans le cas ou les lignes n'ont pas toute la meme taille
+ * @return renvoie la lenght sans le '\\n' ou -1 dans
+ * le cas ou les lignes n'ont pas toute la meme taille
  */
 int	get_lenght(char *file)
 {
@@ -106,7 +110,7 @@ int	get_lenght(char *file)
 	str = get_next_line(fd);
 	while (str)
 	{
-		if(len != (int) ft_strlen(str))
+		if (len != (int) ft_strlen(str))
 			return (close(fd), free(str), -1);
 		free(str);
 		str = get_next_line(fd);
