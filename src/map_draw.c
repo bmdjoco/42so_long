@@ -6,7 +6,7 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 15:22:24 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/07/28 15:23:14 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/07/31 17:17:48 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ void	draw_map(t_game *game)
 	int	i;
 	int	j;
 
-	i = 0;
-	while (i < (*game).carte->height)
+	i = -1;
+	while (++i < (*game).carte->height)
 	{
 		j = 0;
 		while (j < (*game).carte->width)
@@ -68,9 +68,16 @@ void	draw_map(t_game *game)
 					(*game).carte->map[i][j].s);
 			if (!(*game).carte->map[i][j].img)
 				close_window(game);
-			put_img_win(game, j, i, 'm');
 			j++;
 		}
-		i++;
+	}
+	i = -1;
+	while (++i < (*game).carte->height)
+	{
+		j = -1;
+		while (++j < (*game).carte->width)
+		{
+			put_img_win(game, j, i, 'm');
+		}
 	}
 }

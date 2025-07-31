@@ -99,6 +99,8 @@ t_map	*init_map(char *file)
 	l = 0;
 	while (write_line(carte, l, fd))
 		l++;
+	if (l < carte->height)
+		return (free_tmap(carte->map, l - 1), NULL);
 	if (!check_in_out(carte) || !check_bord(carte))
 		return (NULL);
 	tab = to_char_map(carte);
