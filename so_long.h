@@ -6,7 +6,7 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:11:40 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/07/13 13:36:56 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/08/02 15:18:57 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct	s_pos {
 
 typedef struct	s_game {
 	int		score;
+	int		move;
 	void	*mlx;
 	void	*win;
 	t_map	*carte;

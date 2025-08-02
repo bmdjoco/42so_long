@@ -6,7 +6,7 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:12:23 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/07/31 17:16:02 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/08/02 15:19:03 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static void	init_game(t_game *game)
 	game->carte = NULL;
 	game->score = 0;
 	game->pos = NULL;
+	game->move = 0;
 }
 
 static int	define_game(t_game *game, char *file)
