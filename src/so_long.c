@@ -6,7 +6,7 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:12:23 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/08/02 15:19:03 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/08/12 10:11:35 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	define_game(t_game *game, char *file)
 		return (0);
 	game->carte = init_map(file);
 	if (!game->carte)
-		return (mlx_destroy_display(game->mlx), free(game->mlx), exit(0), 0);
+		return (close_window(game));
 	mlx_get_screen_size(game->mlx, &s_width, &s_height);
 	if (s_width < game->carte->width * TYLE_SIZE
 		|| s_height < game->carte->height * TYLE_SIZE)
@@ -71,7 +71,11 @@ int	main(int ac, char **av)
 	t_game	game;
 
 	if (ac != 2)
-		return (ft_putstr_fd("Usage: ./so_long <map.ber>\n", 1), 0);
+		return (ft_putstr_fd("Error\nUsage: ./so_long <map.ber>\n", 2), 0);
+	if (strlen(av[1]) < 5)
+		return (ft_putstr_fd("Error\n", 1), 0);
+	if (ft_strncmp(&av[1][strlen(av[1]) - 4], ".ber", 4))
+		return (ft_putstr_fd("Error\nYou need to use a .ber file\n", 2), 0);
 	init_game(&game);
 	define_game(&game, av[1]);
 	mlx_hook(game.win, 2, 1L << 0, key_press, &game);

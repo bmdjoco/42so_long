@@ -6,7 +6,7 @@
 #    By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/17 14:30:37 by bdjoco            #+#    #+#              #
-#    Updated: 2025/07/31 16:57:25 by bdjoco           ###   ########.fr        #
+#    Updated: 2025/08/04 11:29:20 by bdjoco           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,7 @@ RESET = \e[0m
 all : $(NAME)
 
 $(NAME) : $(OBJ) $(LIBS)
-	@echo "$(BOLD)$(PURPLE)$(NAME)$(RESET)$(GREEN) est compilé$(RESET) ​🔰​"
+	@echo "🔱 $(BOLD)$(PURPLE)$(NAME)$(RESET)$(GREEN) est compilé$(RESET)"
 	@$(CC) $(CFLAGS) $(OBJ) -L$(LIBFT) -lft -L$(FT_PRINTF) -lftprintf $(MLXFLAGS) -o $(NAME) -no-pie
 
 %.o: %.c so_long.h

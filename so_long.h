@@ -6,7 +6,7 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:11:40 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/08/02 15:18:57 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/08/12 12:22:10 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,38 +26,39 @@
 #  define TYLE_SIZE 64
 # endif
 
-typedef struct	s_slot {
+typedef struct s_slot {
 	void	*img;
 	char	s;
-}				t_slot;
+}	t_slot;
 
-typedef struct	s_map {
+typedef struct s_map {
 	int		width;
 	int		height;
 	t_slot	**map;
-}				t_map;
+}	t_map;
 
 typedef struct s_gc_node {
-	void	*ptr;
-	struct	s_gc_node *next;
-} t_gc_node;
+	void				*ptr;
+	struct s_gc_node	*next;
+}	t_gc_node;
 
 /**/
-typedef struct	s_pos {
+typedef struct s_pos {
 	int		x;
 	int		y;
 	void	*player;
-}				t_pos;
+}	t_pos;
 
-typedef struct	s_game {
+typedef struct s_game {
 	int		score;
 	int		move;
 	void	*mlx;
 	void	*win;
 	t_map	*carte;
 	t_pos	*pos;
-}				t_game;
+}	t_game;
 
+int		valid_char(char c);
 int		check_size(char *file);
 int		get_lenght(char *file);
 int		can_access(char **map);
@@ -83,7 +84,6 @@ void	is_drop_case(t_game *vars, int x, int y);
 void	is_movable_case(t_game *vars, int x, int y);
 void	put_img_win(t_game *vars, int x, int y, char c);
 void	floodfil_pv(char **map, int i, int j, int height);
-
 
 t_map	*init_map(char *file);
 

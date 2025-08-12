@@ -6,7 +6,7 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 14:22:19 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/07/28 15:27:19 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/08/12 12:29:08 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	floodfil_pv(char **map, int j, int i, int height)
 		return ;
 	lenght = ft_strlen(map[i]);
 	if (i >= height || j >= lenght || i < 0 || j < 0 || map[i][j] == '1'
+		|| map[i][j] == 'E'
 		|| map[i][j] == 'o' || (map[i][j] >= 'a' && map[i][j] <= 'z'))
 		return ;
 	map[i][j] = newchar(map[i][j]);
@@ -69,18 +70,28 @@ int	can_access(char **map)
 {
 	int		i;
 	int		j;
+	int		nb;
 
 	i = 0;
+	nb = 0;
 	while (map[i])
 	{
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] == 'C' || map[i][j] == 'E')
+			if (map[i][j] == 'C')
 				return (0);
 			j++;
 		}
 		i++;
 	}
 	return (1);
+}
+
+int	valid_char(char c)
+{
+	if (c == '1' || c == '0' || c == 'E'
+		|| c == 'C' || c == 'P')
+		return (1);
+	return (0);
 }

@@ -4,6 +4,7 @@
 		"keysym.h": "c",
 		"ranges": "c",
 		"random": "c",
-		"so_long.h": "c"
+		"so_long.h": "c",
+		"f": "c"
 	}
 }

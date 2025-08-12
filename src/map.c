@@ -18,28 +18,20 @@ static t_map	*alloc_carte(int *fd, char *file)
 
 	*fd = open(file, O_RDONLY);
 	if (*fd == -1)
-		return (ft_printf("fd error\n"), close(*fd), NULL);
+		return (ft_printf("Error: fd\n"), NULL);
 	carte = (t_map *) malloc(sizeof(t_map));
 	if (!carte)
-		return (NULL);
+		return (close(*fd), NULL);
 	carte->height = get_nb_line(file);
 	if (carte->height == -1)
-		return (free(carte), NULL);
+		return (close(*fd), free(carte), NULL);
 	carte->width = get_lenght(file);
 	if (carte->width == -1)
-		return (free(carte), NULL);
+		return (close(*fd), free(carte), NULL);
 	carte->map = (t_slot **) malloc(sizeof(t_slot *) * (carte->height));
 	if (!carte->map)
-		return (free(carte), NULL);
+		return (close(*fd), free(carte), NULL);
 	return (carte);
-}
-
-static int	is_auth(char c)
-{
-	if (c == '0' || c == '1' || c == 'C'
-		|| c == 'E' || c == 'P')
-		return (1);
-	return (0);
 }
 
 static int	write_line(t_map *carte, int nb_l, int fd)
@@ -53,11 +45,12 @@ static int	write_line(t_map *carte, int nb_l, int fd)
 	carte->map[nb_l] = (t_slot *) malloc(sizeof(t_slot) * (carte->width));
 	i = 0;
 	if (!carte->map[nb_l])
-		return (free_tmap(carte->map, i - 1), free(carte), free(res), 0);
+		return (carte->width = -1, free(res), 0);
 	while (res[i] && res[i] != '\n')
 	{
-		if (!is_auth(res[i]))
-			return (free_tmap(carte->map, i), free(carte), free(res), 0);
+		if (!valid_char(res[i]))
+			return (carte->width = -1, free(res),
+				carte = NULL, 0);
 		carte->map[nb_l][i].s = res[i];
 		carte->map[nb_l][i].img = NULL;
 		i++;
@@ -95,16 +88,20 @@ t_map	*init_map(char *file)
 		return (NULL);
 	carte = alloc_carte(&fd, file);
 	if (!carte)
-		return (NULL);
+		return (ft_putstr_fd("Error\n", 2), NULL);
 	l = 0;
 	while (write_line(carte, l, fd))
 		l++;
-	if (l < carte->height)
-		return (free_tmap(carte->map, l - 1), NULL);
+	close(fd);
+	if (carte->width == -1)
+		return (free_tmap(carte->map, l - 1), free(carte),
+			ft_putstr_fd("Error\n", 2), NULL);
 	if (!check_in_out(carte) || !check_bord(carte))
-		return (NULL);
+		return (free_tmap(carte->map, l - 1), free(carte),
+			ft_putstr_fd("Error: map invalid\n", 2), NULL);
 	tab = to_char_map(carte);
 	if (!tab)
-		return (NULL);
+		return (free_tmap(carte->map, l - 1), free(carte),
+			ft_putstr_fd("Error\n", 2), NULL);
 	return (init_map_end(carte, tab));
 }

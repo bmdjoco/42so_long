@@ -53,6 +53,8 @@ int	check_bord(t_map *carte)
 				&& ((i == 0 || i == carte->height - 1)
 				|| (j == 0 || j == carte->width - 1)))
 				return (0);
+			if (!valid_char(carte->map[i][j].s))
+				return (0);
 			j++;
 		}
 		i++;
@@ -124,7 +126,7 @@ int	put_player(t_game *game)
 
 	sityle = TYLE_SIZE;
 	game->pos->player = mlx_xpm_file_to_image(game->mlx,
-			"assets/img/player/initial.xpm", &sityle, &sityle);
+			"textures/initial.xpm", &sityle, &sityle);
 	if (!game->pos->player)
 		return (close_window(game), 0);
 	put_img_win(game, game->pos->x, game->pos->y, 'p');

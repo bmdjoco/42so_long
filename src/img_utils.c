@@ -6,7 +6,7 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 15:52:31 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/07/28 15:26:35 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/08/12 09:28:52 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	is_drop_case(t_game *game, int x, int y)
 	int	x_pos;
 	int	y_pos;
 
+	game->move += 1;
+	ft_printf("Move: %d\n", game->move);
 	x_pos = game->pos->x + x;
 	y_pos = game->pos->y + y;
 	mlx_destroy_image(game->mlx, game->carte->map[y_pos][x_pos].img);
@@ -50,6 +52,8 @@ void	is_movable_case(t_game *game, int x, int y)
 	int	x_pos;
 	int	y_pos;
 
+	game->move += 1;
+	ft_printf("Move: %d\n", game->move);
 	x_pos = game->pos->x + x;
 	y_pos = game->pos->y + y;
 	put_img_win(game, x_pos, y_pos, 'p');

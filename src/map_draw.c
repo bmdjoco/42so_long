@@ -6,7 +6,7 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 15:22:24 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/07/31 17:17:48 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/08/12 12:25:48 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,19 @@ void	*get_image(t_game *game, char c)
 	t_size = 64;
 	if (c == '1')
 		return (mlx_xpm_file_to_image((*game).mlx,
-				"assets/img/wall.xpm", &t_size, &t_size));
+				"textures/wall.xpm", &t_size, &t_size));
 	else if (c == '0')
 		return (mlx_xpm_file_to_image((*game).mlx,
-				"assets/img/ground.xpm", &t_size, &t_size));
+				"textures/ground.xpm", &t_size, &t_size));
 	else if (c == 'P')
 		return (mlx_xpm_file_to_image((*game).mlx,
-				"assets/img/spawn.xpm", &t_size, &t_size));
+				"textures/spawn.xpm", &t_size, &t_size));
 	else if (c == 'E')
 		return (mlx_xpm_file_to_image((*game).mlx,
-				"assets/img/escape.xpm", &t_size, &t_size));
+				"textures/escape.xpm", &t_size, &t_size));
 	else
 		return (mlx_xpm_file_to_image((*game).mlx,
-				"assets/img/drop.xpm", &t_size, &t_size));
+				"textures/drop.xpm", &t_size, &t_size));
 }
 
 void	kill_img_all(t_game *game)

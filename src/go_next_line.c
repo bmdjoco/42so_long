@@ -6,7 +6,7 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 12:28:38 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/07/28 15:22:38 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/08/12 10:03:20 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int	get_lenght(char *file)
 	while (str)
 	{
 		if (len != (int) ft_strlen(str))
-			return (close(fd), free(str), -1);
+			len = 1;
 		free(str);
 		str = get_next_line(fd);
 	}
