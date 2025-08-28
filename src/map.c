@@ -48,9 +48,6 @@ static int	write_line(t_map *carte, int nb_l, int fd)
 		return (carte->width = -1, free(res), 0);
 	while (res[i] && res[i] != '\n')
 	{
-		if (!valid_char(res[i]))
-			return (carte->width = -1, free(res),
-				carte = NULL, 0);
 		carte->map[nb_l][i].s = res[i];
 		carte->map[nb_l][i].img = NULL;
 		i++;

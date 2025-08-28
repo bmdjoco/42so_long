@@ -6,7 +6,7 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 21:39:34 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/07/28 15:20:59 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/08/20 14:05:22 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,31 @@ int	close_window(void *param)
 	}
 	exit(0);
 	return (0);
+}
+
+int	check_map(char *file)
+{
+	int		i;
+	int		t;
+	int		fd;
+	char	*res;
+
+	t = 0;
+	fd = open(file, O_RDONLY);
+	if (fd == -1)
+		return (0);
+	res = get_next_line(fd);
+	while (res)
+	{
+		i = -1;
+		while (res[++i])
+			if (!valid_char(res[i]))
+				t--;
+		free(res);
+		res = get_next_line(fd);
+	}
+	close(fd);
+	if (t < 0)
+		return (0);
+	return (1);
 }

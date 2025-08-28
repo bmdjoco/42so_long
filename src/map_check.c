@@ -53,8 +53,6 @@ int	check_bord(t_map *carte)
 				&& ((i == 0 || i == carte->height - 1)
 				|| (j == 0 || j == carte->width - 1)))
 				return (0);
-			if (!valid_char(carte->map[i][j].s))
-				return (0);
 			j++;
 		}
 		i++;

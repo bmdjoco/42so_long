@@ -6,7 +6,7 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:12:23 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/08/12 10:11:35 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/08/20 14:02:45 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ int	main(int ac, char **av)
 		return (ft_putstr_fd("Error\n", 1), 0);
 	if (ft_strncmp(&av[1][strlen(av[1]) - 4], ".ber", 4))
 		return (ft_putstr_fd("Error\nYou need to use a .ber file\n", 2), 0);
+	if (!check_map(av[1]))
+		return (ft_putstr_fd("Error\ninvalid char\n", 2), 0);
 	init_game(&game);
 	define_game(&game, av[1]);
 	mlx_hook(game.win, 2, 1L << 0, key_press, &game);

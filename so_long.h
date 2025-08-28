@@ -6,7 +6,7 @@
 /*   By: bdjoco <bdjoco@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 16:11:40 by bdjoco            #+#    #+#             */
-/*   Updated: 2025/08/12 12:22:10 by bdjoco           ###   ########.fr       */
+/*   Updated: 2025/08/20 14:03:32 by bdjoco           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int		check_bord(t_map *carte);
 int		close_window(void *param);
 int		check_in_out(t_map	*carte);
 int		move(t_game *vars, int x, int y);
+int		check_map(char *file);
 
 char	**to_char_map(t_map *carte);
 
